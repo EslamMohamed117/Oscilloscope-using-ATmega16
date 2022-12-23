@@ -76,7 +76,7 @@ class Ui_MainWindow(object):
 
     def animate(self):
         plt.cla()
-        plt.bar(x_values,y_values,width=0.001)
+        plt.plot(x_values,y_values)
         plt.show()
         try:
             self.avgFrequencyValue.setText(str(round(float(len(x_values)/sum(x_values)),2))+ " MHz")
@@ -88,20 +88,20 @@ class Ui_MainWindow(object):
         except IndexError:
             print("IndexError")
             self.pulseWidthValue.setText("ERROR")
+        x_values.clear()
+        y_values.clear()
 
     def readingSerialPortThread(self, serialPort):
         print("readingSerialPortThread")
         while True:
             if serialPort.isOpen() & serialPort.inWaiting() >0:
                 data = self.receive_data(serialPort)
-                y_values.clear()
-                x_values.clear()
-                for i in range(3):
-                    y_values.append(int(data[i*7+1:i*7+2].hex(),16))
+                for i in range(60):
+                    y_values.append(((int(data[i*7+1:i*7+2].hex(),16)/255)*5))
                     x_values.append(int(data[(i*7)+2:(i*7)+6].hex(),16)* 0.000001)
                 #print table of x and y values
-                print("x_values: ", x_values)
-                print("y_values: ", y_values)             
+                #print("x_values: ", x_values)
+                #print("y_values: ", y_values)             
               
 
 
@@ -177,7 +177,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Logic Analyzer"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Oscilloscope"))
         self.connectionGroup.setTitle(_translate("MainWindow", "Connection"))
         self.disconnectBtn.setText(_translate("MainWindow", "Disconnect"))
         self.connectionStatusLabel.setText(_translate("MainWindow", "Connection status:"))

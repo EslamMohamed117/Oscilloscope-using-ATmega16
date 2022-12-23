@@ -102,17 +102,18 @@ void OSCI_MainFunction(void)
                 UART_SendPayload(_sample_buf, FULL_SAMPLE_CNT);
                 while (0 == UART_IsTxComplete());
             }
- 
+			samples_cnt=0;
             // Trigger receiving for go signal.
             //UART_ReceivePayload((uint8_t *)_go_signal_buf, 1);   
         }
         case IDLE:
         {
             //currentState = ((1 == UART_IsRxComplete())&&(_go_signal_buf == 'G')) ? SAMPLING : IDLE;
-            currentState = IDLE;
+            currentState = SAMPLING;
 			if(currentState == SAMPLING)
             {
                 _go_signal_buf = 'N';
+				TIMER_Reset();
                 // TODO: Place your code here to reset the timer value.
             }
  

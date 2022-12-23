@@ -3,31 +3,31 @@ Oscilloscope.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000063a  00000000  00000000  00000074  2**1
+  0 .text         00000640  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  000006ae  2**0
+  1 .data         00000000  00800060  00800060  000006b4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          0000020b  00800060  00800060  000006ae  2**0
+  2 .bss          0000020b  00800060  00800060  000006b4  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000006ae  2**0
+  3 .comment      00000030  00000000  00000000  000006b4  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000006e0  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000006e4  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000001c8  00000000  00000000  0000071c  2**0
+  5 .debug_aranges 000001c8  00000000  00000000  00000720  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000148e  00000000  00000000  000008e4  2**0
+  6 .debug_info   000014a3  00000000  00000000  000008e8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000c1c  00000000  00000000  00001d72  2**0
+  7 .debug_abbrev 00000c1a  00000000  00000000  00001d8b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000f0e  00000000  00000000  0000298e  2**0
+  8 .debug_line   00000f1a  00000000  00000000  000029a5  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  0000032c  00000000  00000000  0000389c  2**2
+  9 .debug_frame  0000032c  00000000  00000000  000038c0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000006d3  00000000  00000000  00003bc8  2**0
+ 10 .debug_str    000006d3  00000000  00000000  00003bec  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000b0a  00000000  00000000  0000429b  2**0
+ 11 .debug_loc    00000b0a  00000000  00000000  000042bf  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000160  00000000  00000000  00004da5  2**0
+ 12 .debug_ranges 00000178  00000000  00000000  00004dc9  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -149,7 +149,7 @@ Disassembly of section .text:
   fc:	b2 07       	cpc	r27, r18
   fe:	e1 f7       	brne	.-8      	; 0xf8 <.do_clear_bss_loop>
  100:	0e 94 70 02 	call	0x4e0	; 0x4e0 <main>
- 104:	0c 94 1b 03 	jmp	0x636	; 0x636 <_exit>
+ 104:	0c 94 1e 03 	jmp	0x63c	; 0x63c <_exit>
 
 00000108 <__bad_interrupt>:
  108:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -259,7 +259,7 @@ void DIO_SET_PIN_DIR(unsigned char port, unsigned char pin, unsigned char dir)
  174:	67 c0       	rjmp	.+206    	; 0x244 <__EEPROM_REGION_LENGTH__+0x44>
  176:	e6 5d       	subi	r30, 0xD6	; 214
  178:	ff 4f       	sbci	r31, 0xFF	; 255
- 17a:	0c 94 06 03 	jmp	0x60c	; 0x60c <__tablejump2__>
+ 17a:	0c 94 09 03 	jmp	0x612	; 0x612 <__tablejump2__>
 	{
 		//Direction of Pin in port A
 		case 'A':
@@ -425,7 +425,7 @@ void DIO_SET_PIN_VAL(unsigned char port, unsigned char pin, unsigned char val)
  254:	67 c0       	rjmp	.+206    	; 0x324 <DIO_SET_PIN_VAL+0xde>
  256:	e2 5b       	subi	r30, 0xB2	; 178
  258:	ff 4f       	sbci	r31, 0xFF	; 255
- 25a:	0c 94 06 03 	jmp	0x60c	; 0x60c <__tablejump2__>
+ 25a:	0c 94 09 03 	jmp	0x612	; 0x612 <__tablejump2__>
 	{
 		//Value of Pin in port A
 		case 'A':
@@ -843,7 +843,7 @@ int main(void)
  4f2:	30 e0       	ldi	r19, 0x00	; 0
  4f4:	af ef       	ldi	r26, 0xFF	; 255
  4f6:	bf ef       	ldi	r27, 0xFF	; 255
- 4f8:	0e 94 0c 03 	call	0x618	; 0x618 <__umulhisi3>
+ 4f8:	0e 94 0f 03 	call	0x61e	; 0x61e <__umulhisi3>
  4fc:	dc 01       	movw	r26, r24
  4fe:	cb 01       	movw	r24, r22
  500:	84 0f       	add	r24, r20
@@ -897,8 +897,8 @@ void OSCI_MainFunction(void)
  53c:	20 f0       	brcs	.+8      	; 0x546 <OSCI_MainFunction+0x1a>
  53e:	82 30       	cpi	r24, 0x02	; 2
  540:	09 f4       	brne	.+2      	; 0x544 <OSCI_MainFunction+0x18>
- 542:	5d c0       	rjmp	.+186    	; 0x5fe <OSCI_MainFunction+0xd2>
- 544:	5f c0       	rjmp	.+190    	; 0x604 <OSCI_MainFunction+0xd8>
+ 542:	5f c0       	rjmp	.+190    	; 0x602 <OSCI_MainFunction+0xd6>
+ 544:	62 c0       	rjmp	.+196    	; 0x60a <OSCI_MainFunction+0xde>
     {
         case SAMPLING:
         {
@@ -941,7 +941,7 @@ void OSCI_MainFunction(void)
  58a:	80 e0       	ldi	r24, 0x00	; 0
  58c:	80 93 69 02 	sts	0x0269, r24	; 0x800269 <currentState>
             break;
- 590:	39 c0       	rjmp	.+114    	; 0x604 <OSCI_MainFunction+0xd8>
+ 590:	3c c0       	rjmp	.+120    	; 0x60a <OSCI_MainFunction+0xde>
             for(uint8_t i = 0; i < _SAMPLES_NUM; ++i)
             {
                 // Construct the buffer.
@@ -1033,52 +1033,63 @@ void OSCI_MainFunction(void)
             for(uint8_t i = 0; i < _SAMPLES_NUM; ++i)
  5fa:	14 36       	cpi	r17, 0x64	; 100
  5fc:	50 f2       	brcs	.-108    	; 0x592 <OSCI_MainFunction+0x66>
+ 
+                // Send sample.
+                UART_SendPayload(_sample_buf, FULL_SAMPLE_CNT);
+                while (0 == UART_IsTxComplete());
+            }
+			samples_cnt=0;
+ 5fe:	10 92 74 00 	sts	0x0074, r1	; 0x800074 <samples_cnt.1976>
             //UART_ReceivePayload((uint8_t *)_go_signal_buf, 1);   
         }
         case IDLE:
         {
             //currentState = ((1 == UART_IsRxComplete())&&(_go_signal_buf == 'G')) ? SAMPLING : IDLE;
-            currentState = IDLE;
- 5fe:	82 e0       	ldi	r24, 0x02	; 2
- 600:	80 93 69 02 	sts	0x0269, r24	; 0x800269 <currentState>
+            currentState = SAMPLING;
+ 602:	10 92 69 02 	sts	0x0269, r1	; 0x800269 <currentState>
+			if(currentState == SAMPLING)
+            {
+                _go_signal_buf = 'N';
+				TIMER_Reset();
+ 606:	0e 94 93 01 	call	0x326	; 0x326 <TIMER_Reset>
  
             break;
         }
         default: {/* Do nothing.*/}
     }
 }
- 604:	df 91       	pop	r29
- 606:	cf 91       	pop	r28
- 608:	1f 91       	pop	r17
- 60a:	08 95       	ret
+ 60a:	df 91       	pop	r29
+ 60c:	cf 91       	pop	r28
+ 60e:	1f 91       	pop	r17
+ 610:	08 95       	ret
 
-0000060c <__tablejump2__>:
- 60c:	ee 0f       	add	r30, r30
- 60e:	ff 1f       	adc	r31, r31
- 610:	05 90       	lpm	r0, Z+
- 612:	f4 91       	lpm	r31, Z
- 614:	e0 2d       	mov	r30, r0
- 616:	09 94       	ijmp
+00000612 <__tablejump2__>:
+ 612:	ee 0f       	add	r30, r30
+ 614:	ff 1f       	adc	r31, r31
+ 616:	05 90       	lpm	r0, Z+
+ 618:	f4 91       	lpm	r31, Z
+ 61a:	e0 2d       	mov	r30, r0
+ 61c:	09 94       	ijmp
 
-00000618 <__umulhisi3>:
- 618:	a2 9f       	mul	r26, r18
- 61a:	b0 01       	movw	r22, r0
- 61c:	b3 9f       	mul	r27, r19
- 61e:	c0 01       	movw	r24, r0
- 620:	a3 9f       	mul	r26, r19
- 622:	70 0d       	add	r23, r0
- 624:	81 1d       	adc	r24, r1
- 626:	11 24       	eor	r1, r1
- 628:	91 1d       	adc	r25, r1
- 62a:	b2 9f       	mul	r27, r18
- 62c:	70 0d       	add	r23, r0
- 62e:	81 1d       	adc	r24, r1
- 630:	11 24       	eor	r1, r1
- 632:	91 1d       	adc	r25, r1
- 634:	08 95       	ret
+0000061e <__umulhisi3>:
+ 61e:	a2 9f       	mul	r26, r18
+ 620:	b0 01       	movw	r22, r0
+ 622:	b3 9f       	mul	r27, r19
+ 624:	c0 01       	movw	r24, r0
+ 626:	a3 9f       	mul	r26, r19
+ 628:	70 0d       	add	r23, r0
+ 62a:	81 1d       	adc	r24, r1
+ 62c:	11 24       	eor	r1, r1
+ 62e:	91 1d       	adc	r25, r1
+ 630:	b2 9f       	mul	r27, r18
+ 632:	70 0d       	add	r23, r0
+ 634:	81 1d       	adc	r24, r1
+ 636:	11 24       	eor	r1, r1
+ 638:	91 1d       	adc	r25, r1
+ 63a:	08 95       	ret
 
-00000636 <_exit>:
- 636:	f8 94       	cli
+0000063c <_exit>:
+ 63c:	f8 94       	cli
 
-00000638 <__stop_program>:
- 638:	ff cf       	rjmp	.-2      	; 0x638 <__stop_program>
+0000063e <__stop_program>:
+ 63e:	ff cf       	rjmp	.-2      	; 0x63e <__stop_program>
